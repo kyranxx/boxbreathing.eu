@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoxBreathing.EU</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="logo-container">
+        <h1 class="logo">BoxBreathing.EU</h1>
+        <img src="eu_flag.svg" alt="EU Flag" class="eu-flag">
+    </div>
+    <div class="graphic-container">
+        <svg class="progress-ring" width="300" height="300">
+            <circle
+                class="progress-ring__circle"
+                stroke="white"
+                stroke-width="4"
+                fill="transparent"
+                r="140"
+                cx="150"
+                cy="150"/>
+        </svg>
+        <div id="breathing-graphic" class="circle"></div>
+        <div class="text-overlay">
+            <span id="instruction-text"></span>
+            <span id="countdown"></span>
+        </div>
+        <svg id="cycle-counter" width="60" height="60">
+            <circle cx="30" cy="30" r="25" fill="rgba(0,0,0,0.2)" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+            <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="24">0</text>
+            <path id="cycle-arrow" d="M 30 5 A 25 25 0 1 1 29.99 5" fill="none" stroke="white" stroke-width="2"/>
+        </svg>
+    </div>
+
+    <div class="ekg-container">
+        <svg id="ekg-graph" width="400" height="100"></svg>
+    </div>
+
+    <div class="controls">
+        <button id="play-pause-btn">Pause Breathing</button>
+    </div>
+
+    <div class="music-player">
+        <div id="youtube-player"></div>
+        <div class="music-controls">
+            <p>Lofi Music</p>
+            <button id="music-play-pause-btn">Play</button>
+        </div>
+    </div>
+
+    <div class="settings-container">
+        <div class="setting">
+            <label for="pattern-select">Pattern:</label>
+            <select id="pattern-select">
+                <option value="4-7-8">4-7-8 (Inhale-Hold-Exhale)</option>
+                <option value="4-4-4-4">4-4-4-4 (Box)</option>
+                <option value="5-5-5">5-5-5 (Inhale-Hold-Exhale)</option>
+            </select>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
