@@ -3,9 +3,15 @@
     src: url('Dongle-Bold.ttf') format('truetype');
 }
 
+:root {
+    --graphic-size: 60vmin;
+    --ring-size: 70vmin;
+}
+
 body {
     margin: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -14,51 +20,55 @@ body {
     background-position: center;
     overflow: hidden;
     font-family: 'Dongle', sans-serif;
-    font-size: 22px; /* Base font size */
+    font-size: 22px;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 .logo-container {
     position: absolute;
-    top: -10px; /* Moved higher */
-    left: 15px; /* More padding */
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 5px;
 }
 
 .logo {
     font-family: 'Dongle', serif;
-    font-size: 64px;
+    font-size: 10vw;
     color: #fff;
     font-weight: 400;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 5px rgba(0, 0, 0, 0.5);
-    margin: 0; /* Remove default margin */
+    margin: 0;
 }
 
 .eu-flag {
-    width: 30px; /* Made smaller */
+    width: 8vw;
     height: auto;
 }
-
-/* Removed color-change animation */
 
 .graphic-container {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .progress-ring {
     position: absolute;
-    transform: rotate(-90deg); /* Start from the top */
+    width: var(--ring-size);
+    height: var(--ring-size);
+    transform: rotate(-90deg);
 }
 
 .progress-ring__circle {
     transition: stroke-dashoffset 0.2s linear, transform 0.5s ease-out;
     stroke-linecap: round;
-    stroke: #f5f5dc; /* Beige color */
-    stroke-width: 8px; /* Thicker */
+    stroke: #f5f5dc;
+    stroke-width: 8px;
 }
 
 .text-overlay {
@@ -68,115 +78,57 @@ body {
     justify-content: center;
     align-items: center;
     color: #333;
-    font-size: 64px; /* Increased size */
-    width: 250px; /* Match graphic size */
-    height: 250px; /* Match graphic size */
-    pointer-events: none; /* Allow clicks to pass through */
+    font-size: 12vmin;
+    width: var(--graphic-size);
+    height: var(--graphic-size);
+    pointer-events: none;
 }
 
 #breathing-graphic {
-    width: 250px;
-    height: 250px;
+    width: var(--graphic-size);
+    height: var(--graphic-size);
     box-shadow: 0 0 30px rgba(0,0,0,0.2), inset 0 0 20px rgba(255,255,255,0.6);
-    background: radial-gradient(circle, #a8e6cf, #dcedc1); /* Single calm color */
+    background: radial-gradient(circle, #a8e6cf, #dcedc1);
     position: relative;
+    border-radius: 50%;
 }
 
 #breathing-graphic.paused::after {
-    content: '⏸'; /* Pause symbol */
+    content: '⏸';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 80px;
+    font-size: 15vmin;
     color: rgba(0, 0, 0, 0.5);
 }
 
 #instruction-text {
-    font-size: 48px; /* Increased size */
+    font-size: 8vmin;
     margin-bottom: 15px;
-}
-
-#countdown {
-    transform: none !important; /* Prevents scaling with parent */
 }
 
 #cycle-counter {
     position: absolute;
-    top: -80px; /* Moved higher */
-}
-
-#cycle-arrow {
-    stroke-dasharray: 157; /* Circumference of the circle */
-    stroke-dashoffset: 157;
-    transition: stroke-dashoffset 0.5s linear;
-}
-
-#breathing-graphic.circle {
-    border-radius: 50%;
-}
-
-.settings-container {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.setting {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.setting label {
-    font-weight: bold;
-}
-
-.setting select {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #f0f0f0;
-    font-family: 'Dongle', sans-serif;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.setting select:hover {
-    background-color: #e0e0e0;
-}
-
-#breathing-graphic.square {
-    border-radius: 0;
+    top: calc(50% - var(--ring-size) / 2 - 40px); /* Position above the ring */
 }
 
 .ekg-container {
     position: absolute;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 120px;
+    width: 80%;
+    max-width: 400px;
 }
-
 
 .controls {
     position: absolute;
     bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 #play-pause-btn {
-    width: 80px; /* Fixed width */
-    height: 50px; /* Fixed height */
-    font-size: 30px; /* Adjusted for symbols */
+    width: 80px;
+    height: 50px;
+    font-size: 30px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -187,33 +139,54 @@ body {
     align-items: center;
 }
 
-#play-pause-btn:hover {
-    background-color: #e0e0e0;
-}
-
 .music-player {
     position: absolute;
-    top: 10px; /* Moved higher */
-    right: 15px; /* More padding */
-    color: #fff;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    top: 10px;
+    right: 15px;
 }
 
-#youtube-player {
-    display: none; /* Hide the actual player */
+.settings-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.music-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+/* Tablet and Desktop Styles */
+@media (min-width: 768px) {
+    :root {
+        --graphic-size: 250px;
+        --ring-size: 300px;
+    }
 
-#music-play-pause-btn {
-    padding: 8px 15px;
-    font-size: 20px; /* Increased size */
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-family: 'Dongle', sans-serif; /* Ensure font is applied */
+    .logo {
+        font-size: 64px;
+    }
+
+    .eu-flag {
+        width: 30px;
+    }
+
+    .text-overlay {
+        font-size: 64px;
+    }
+
+    #breathing-graphic.paused::after {
+        font-size: 80px;
+    }
+
+    #instruction-text {
+        font-size: 48px;
+    }
+
+    #cycle-counter {
+        top: -80px;
+    }
+
+    .ekg-container {
+        bottom: 100px;
+    }
 }

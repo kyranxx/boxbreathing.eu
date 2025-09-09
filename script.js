@@ -25,10 +25,16 @@ let lastTimestamp = 0;
 let cycleCount = 0;
 
 // Progress Ring
-const radius = progressRing.r.baseVal.value;
-const circumference = radius * 2 * Math.PI;
-progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
-progressRing.style.strokeDashoffset = circumference;
+let radius = 140; // Default for desktop
+let circumference = radius * 2 * Math.PI;
+
+function updateRing() {
+    const ringSize = getComputedStyle(progressRingSvg).width;
+    radius = parseFloat(ringSize) / 2;
+    circumference = radius * 2 * Math.PI;
+    progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+    progressRing.style.strokeDashoffset = circumference;
+}
 
 function setProgress(percent) {
     const offset = circumference - percent / 100 * circumference;
@@ -239,5 +245,7 @@ window.addEventListener('keydown', (e) => {
 // --- Initial call ---
 patternSelect.value = '4-4-4-4'; // Set default in dropdown
 playPauseBtn.innerHTML = '&#10074;&#10074;'; // Set initial state to pause symbol
+window.addEventListener('resize', updateRing);
+updateRing();
 resetAnimationState();
 startBreathingCycle();
