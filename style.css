@@ -33,6 +33,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 5px;
+    z-index: 10;
 }
 
 .logo {
@@ -54,7 +55,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    order: 2; /* Order for mobile flex layout */
 }
 
 .progress-ring {
@@ -110,19 +111,19 @@ body {
 
 #cycle-counter {
     position: absolute;
-    top: calc(50% - var(--ring-size) / 2 - 40px); /* Position above the ring */
+    top: calc(50% - var(--ring-size) / 2 - 40px);
 }
 
 .ekg-container {
-    position: absolute;
-    bottom: 120px;
+    order: 1; /* Position before graphic */
     width: 80%;
     max-width: 400px;
+    margin-bottom: 10px;
 }
 
 .controls {
-    position: absolute;
-    bottom: 30px;
+    order: 3; /* Position after graphic */
+    margin-top: 10px;
 }
 
 #play-pause-btn {
@@ -140,15 +141,13 @@ body {
 }
 
 .music-player {
-    position: absolute;
-    top: 10px;
-    right: 15px;
+    order: 5; /* After settings */
+    margin-top: 10px;
 }
 
 .settings-container {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    order: 4; /* After controls */
+    margin-top: 10px;
     background: rgba(255, 255, 255, 0.8);
     padding: 15px;
     border-radius: 10px;
@@ -160,6 +159,10 @@ body {
     :root {
         --graphic-size: 250px;
         --ring-size: 300px;
+    }
+
+    body {
+        justify-content: center; /* Re-center for desktop */
     }
 
     .logo {
@@ -187,6 +190,32 @@ body {
     }
 
     .ekg-container {
+        position: absolute;
         bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 0;
+    }
+
+    .controls {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 0;
+    }
+
+    .music-player {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        margin-top: 0;
+    }
+
+    .settings-container {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        margin-top: 0;
     }
 }
